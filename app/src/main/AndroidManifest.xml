@@ -45,6 +45,7 @@
         <activity android:name=".UserDetailsActivity" android:exported="false"/>
         <activity android:name=".UserContactsActivity" android:exported="false"/>
         <activity android:name=".UserLocationActivity" android:exported="false"/>
+        <activity android:name=".TimerSettingActivity" android:exported="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="false"/>

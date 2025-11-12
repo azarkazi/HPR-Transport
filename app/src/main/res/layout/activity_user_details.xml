@@ -18,9 +18,19 @@
         android:padding="16dp">
 
         <Button
+            android:id="@+id/btn_timer_setting"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/rounded_button"
+            android:text="Timer Setting"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <Button
             android:id="@+id/btn_show_contacts"
             android:layout_width="match_parent"
             android:layout_height="80dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/rounded_button"
             android:text="Show Contacts"
             android:textColor="@android:color/white"

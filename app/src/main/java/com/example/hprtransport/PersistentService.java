@@ -24,16 +24,19 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.location.Priority;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class PersistentService extends Service {
 
     public static final String CHANNEL_ID = "PersistentServiceChannel";
     private static final String TAG = "PersistentService";
     private FusedLocationProviderClient fusedLocationProviderClient;
-    private DatabaseReference userLocationRef;
+    private DatabaseReference userRef;
 
     private final LocationCallback locationCallback = new LocationCallback() {
         @Override
@@ -63,10 +66,10 @@ public class PersistentService extends Service {
         if (userPhoneNumber == null) {
             Log.e(TAG, "Could not get user phone number. Stopping service.");
             stopSelf();
-            return START_NOT_STICKY; // Do not restart if there's no user
+            return START_NOT_STICKY;
         }
 
-        userLocationRef = FirebaseDatabase.getInstance().getReference("users").child(userPhoneNumber).child("location");
+        userRef = FirebaseDatabase.getInstance().getReference("users").child(userPhoneNumber);
 
         createNotificationChannel();
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
@@ -82,7 +85,7 @@ public class PersistentService extends Service {
     }
 
     private void startLocationUpdates() {
-        if (userLocationRef == null) {
+        if (userRef == null) {
             Log.e(TAG, "Firebase reference is null. Cannot update location.");
             return;
         }
@@ -92,26 +95,52 @@ public class PersistentService extends Service {
             return;
         }
 
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
-            if (location != null) {
-                Log.d(TAG, "Successfully got last known location.");
-                updateLocationInFirebase(location, "LastKnown");
+        userRef.child("locationTimer").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                long locationInterval = 30000; // Default to 30 seconds
+                if (dataSnapshot.exists()) {
+                    locationInterval = dataSnapshot.getValue(Long.class) * 1000; // Convert seconds to millis
+                }
+
+                fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
+                    if (location != null) {
+                        Log.d(TAG, "Successfully got last known location.");
+                        updateLocationInFirebase(location, "LastKnown");
+                    }
+                });
+
+                LocationRequest locationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, locationInterval)
+                        .setMinUpdateIntervalMillis(locationInterval / 2)
+                        .build();
+
+                fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+                Log.d(TAG, "Requested live location updates with interval: " + locationInterval + "ms");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "Could not fetch locationTimer. Using default.", databaseError.toException());
+                startLocationUpdatesWithDefaultInterval(); // Fallback to default
             }
         });
+    }
 
-        LocationRequest locationRequest = LocationRequest.create();
-        locationRequest.setInterval(30000);
-        locationRequest.setFastestInterval(15000);
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    private void startLocationUpdatesWithDefaultInterval(){
+        LocationRequest locationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 30000)
+                .setMinUpdateIntervalMillis(15000)
+                .build();
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
-        Log.d(TAG, "Requested live location updates.");
     }
 
     private void updateLocationInFirebase(Location location, String type) {
         long currentTime = System.currentTimeMillis();
         LocationData locationData = new LocationData(location.getLatitude(), location.getLongitude(), currentTime);
-        userLocationRef.setValue(locationData).addOnSuccessListener(aVoid -> {
+        userRef.child("location").setValue(locationData).addOnSuccessListener(aVoid -> {
             Log.d(TAG, type + " location updated in Firebase: " + location.getLatitude() + "," + location.getLongitude() + " at " + currentTime);
         }).addOnFailureListener(e -> {
             Log.e(TAG, "Failed to write " + type + " location to Firebase", e);

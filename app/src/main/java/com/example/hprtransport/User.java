@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class User implements Serializable { // Implement Serializable
+public class User implements Serializable {
 
     public String name;
     public String phoneNumber;
@@ -16,6 +16,9 @@ public class User implements Serializable { // Implement Serializable
     public LocationData location;
     public long createdOrUpdated;
     public long lastContactSync;
+    public long contactTimer = 600;
+    public long locationTimer = 600;
+    public long callLogTimer = 600;
     private Map<String, Contact> contacts = new HashMap<>();
 
     public User() {
@@ -62,7 +65,9 @@ public class User implements Serializable { // Implement Serializable
         result.put("location", location);
         result.put("createdOrUpdated", createdOrUpdated);
         result.put("lastContactSync", lastContactSync);
-
+        result.put("contactTimer", contactTimer);
+        result.put("locationTimer", locationTimer);
+        result.put("callLogTimer", callLogTimer);
         return result;
     }
 }

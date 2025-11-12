@@ -33,8 +33,15 @@ public class UserDetailsActivity extends AppCompatActivity {
         detailPhone.setText("Phone: " + selectedUser.phoneNumber);
         detailVehicle.setText("Vehicle No: " + selectedUser.vehicleNumber);
 
+        Button btnTimerSetting = findViewById(R.id.btn_timer_setting);
         Button btnShowContacts = findViewById(R.id.btn_show_contacts);
         Button btnShowLocation = findViewById(R.id.btn_show_location);
+
+        btnTimerSetting.setOnClickListener(v -> {
+            Intent intent = new Intent(UserDetailsActivity.this, TimerSettingActivity.class);
+            intent.putExtra("SELECTED_USER", selectedUser);
+            startActivity(intent);
+        });
 
         btnShowContacts.setOnClickListener(v -> {
             if (selectedUser.getContacts() == null || selectedUser.getContacts().isEmpty()) {
