@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "314324024065",
+    "project_id": "hpr-transport-and-fff8d",
+    "storage_bucket": "hpr-transport-and-fff8d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314324024065:android:1f89aaed8cb0730d607900",
+        "android_client_info": {
+          "package_name": "com.example.hprtransport"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB462-y48ZUbv7R35EVF8Lo_GcCxEKJqpU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
