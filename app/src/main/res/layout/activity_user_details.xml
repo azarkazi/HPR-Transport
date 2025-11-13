@@ -1,51 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorBackground"
     tools:context=".UserDetailsActivity">
 
     <include
         android:id="@+id/user_details_app_bar"
         layout="@layout/app_bar_user_details" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/user_details_app_bar"
+        android:fillViewport="true">
 
-        <Button
-            android:id="@+id/btn_timer_setting"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@drawable/rounded_button"
-            android:text="Timer Setting"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_large">
 
-        <Button
-            android:id="@+id/btn_show_contacts"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/rounded_button"
-            android:text="Show Contacts"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            <!-- Timer Setting Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_timer_setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_medium"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/elevation_medium"
+                app:cardBackgroundColor="?attr/colorPrimaryContainer">
 
-        <Button
-            android:id="@+id/btn_show_location"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/rounded_button"
-            android:text="Show Location"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_large"
+                    android:gravity="center">
 
-    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⏱️"
+                        android:textSize="48sp"
+                        android:layout_marginBottom="@dimen/spacing_small" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_timer_setting"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height_large"
+                        android:text="Timer Setting"
+                        android:textSize="@dimen/text_size_large"
+                        app:cornerRadius="@dimen/button_corner_radius" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Show Contacts Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_contacts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_medium"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/elevation_medium"
+                app:cardBackgroundColor="?attr/colorSecondaryContainer">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_large"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📞"
+                        android:textSize="48sp"
+                        android:layout_marginBottom="@dimen/spacing_small" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_show_contacts"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height_large"
+                        android:text="Show Contacts"
+                        android:textSize="@dimen/text_size_large"
+                        app:cornerRadius="@dimen/button_corner_radius"
+                        style="@style/Widget.MaterialComponents.Button" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Show Location Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/elevation_medium"
+                app:cardBackgroundColor="?attr/colorTertiaryContainer">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_large"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📍"
+                        android:textSize="48sp"
+                        android:layout_marginBottom="@dimen/spacing_small" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_show_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height_large"
+                        android:text="Show Location"
+                        android:textSize="@dimen/text_size_large"
+                        app:cornerRadius="@dimen/button_corner_radius"
+                        style="@style/Widget.MaterialComponents.Button" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorBackground"
     tools:context=".AdminHomeActivity">
 
     <include
@@ -13,6 +14,10 @@
         android:id="@+id/user_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/admin_app_bar" />
+        android:layout_below="@+id/admin_app_bar"
+        android:padding="@dimen/padding_small"
+        android:clipToPadding="false"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/spacing_small" />
 
 </RelativeLayout>
