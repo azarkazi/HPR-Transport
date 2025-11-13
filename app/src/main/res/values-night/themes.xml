@@ -1,16 +1,93 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Dark theme - Material Design 3 -->
     <style name="Theme.HPRTransport" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/md_theme_dark_primary</item>
+        <item name="colorPrimaryVariant">@color/md_theme_dark_onPrimaryContainer</item>
+        <item name="colorOnPrimary">@color/md_theme_dark_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_dark_primaryContainer</item>
+        
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/md_theme_dark_secondary</item>
+        <item name="colorSecondaryVariant">@color/md_theme_dark_onSecondaryContainer</item>
+        <item name="colorOnSecondary">@color/md_theme_dark_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_dark_secondaryContainer</item>
+        
+        <!-- Tertiary color. -->
+        <item name="colorTertiary">@color/md_theme_dark_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_dark_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_dark_tertiaryContainer</item>
+        
+        <!-- Error color. -->
+        <item name="colorError">@color/md_theme_dark_error</item>
+        <item name="colorOnError">@color/md_theme_dark_onError</item>
+        <item name="colorErrorContainer">@color/md_theme_dark_errorContainer</item>
+        
+        <!-- Background & Surface. -->
+        <item name="android:colorBackground">@color/md_theme_dark_background</item>
+        <item name="colorOnBackground">@color/md_theme_dark_onBackground</item>
+        <item name="colorSurface">@color/md_theme_dark_surface</item>
+        <item name="colorOnSurface">@color/md_theme_dark_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_dark_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_dark_onSurfaceVariant</item>
+        
+        <!-- Outline. -->
+        <item name="colorOutline">@color/md_theme_dark_outline</item>
+        
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">@color/md_theme_dark_surface</item>
+        <item name="android:windowLightStatusBar">false</item>
+        
+        <!-- Material Components Styles -->
+        <item name="materialButtonStyle">@style/Widget.HPRTransport.Button</item>
+        <item name="textInputStyle">@style/Widget.HPRTransport.TextInputLayout.Dark</item>
+        <item name="materialCardViewStyle">@style/Widget.HPRTransport.CardView.Dark</item>
+        
+        <!-- Typography -->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.HPRTransport.Headline1.Dark</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.HPRTransport.Headline2.Dark</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.HPRTransport.Body1.Dark</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.HPRTransport.Body2.Dark</item>
+    </style>
+    
+    <!-- Text Input Layout Style - Dark -->
+    <style name="Widget.HPRTransport.TextInputLayout.Dark" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/corner_radius_medium</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/corner_radius_medium</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/corner_radius_medium</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/corner_radius_medium</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="boxStrokeColor">@color/md_theme_dark_primary</item>
+    </style>
+    
+    <!-- Card View Style - Dark -->
+    <style name="Widget.HPRTransport.CardView.Dark" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="contentPadding">@dimen/padding_medium</item>
+        <item name="cardBackgroundColor">@color/card_background_dark</item>
+    </style>
+    
+    <!-- Typography Styles - Dark -->
+    <style name="TextAppearance.HPRTransport.Headline1.Dark" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="android:textSize">@dimen/text_size_display</item>
+        <item name="android:textColor">@color/md_theme_dark_onBackground</item>
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+    
+    <style name="TextAppearance.HPRTransport.Headline2.Dark" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="android:textSize">@dimen/text_size_headline</item>
+        <item name="android:textColor">@color/md_theme_dark_onBackground</item>
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+    
+    <style name="TextAppearance.HPRTransport.Body1.Dark" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textColor">@color/md_theme_dark_onBackground</item>
+    </style>
+    
+    <style name="TextAppearance.HPRTransport.Body2.Dark" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="android:textColor">@color/md_theme_dark_onSurfaceVariant</item>
     </style>
 </resources>
